@@ -84,7 +84,7 @@ function SearchContent() {
   );
 
   return (
-    <div className="min-h-full flex flex-col bg-slate-950 text-slate-100">
+    <div className="flex-1 w-full flex flex-col bg-slate-950 text-slate-100">
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 p-4 shadow-sm">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-6">
@@ -161,16 +161,23 @@ function SearchContent() {
                       {result.authors && result.authors.length > 0 && (
                         <div className="flex flex-wrap items-center gap-2 text-sm">
                           {result.authors.map((author, i) => (
-                            <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
-                              <User className="w-3.5 h-3.5 text-slate-400" />
-                              {author.link ? (
-                                <a href={author.link} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 hover:underline transition-colors">
-                                  {author.name}
-                                </a>
-                              ) : (
+                            author.link ? (
+                              <a 
+                                key={i} 
+                                href={author.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-950/40 text-cyan-300 border border-cyan-800/60 hover:bg-cyan-900/60 hover:border-cyan-600/60 hover:text-cyan-200 transition-all shadow-sm"
+                              >
+                                <User className="w-3.5 h-3.5 text-cyan-500" />
+                                {author.name}
+                              </a>
+                            ) : (
+                              <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
+                                <User className="w-3.5 h-3.5 text-slate-400" />
                                 <span>{author.name}</span>
-                              )}
-                            </span>
+                              </span>
+                            )
                           ))}
                         </div>
                       )}
