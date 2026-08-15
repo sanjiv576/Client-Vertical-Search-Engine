@@ -105,7 +105,7 @@ function SearchContent() {
             </div>
             <input
               type="text"
-              className="w-full pl-12 pr-4 py-3 rounded-full bg-slate-800/80 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-800 focus:ring-2 focus:ring-cyan-500/20 text-slate-100 placeholder-slate-400 outline-none transition-all shadow-inner"
+              className="w-full pl-12 pr-4 py-3 rounded-full text-md bg-slate-800/80 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-800 focus:ring-2 focus:ring-cyan-500/20 text-slate-100 placeholder-slate-400 outline-none transition-all shadow-inner"
               value={queryInput}
               onChange={(e) => setQueryInput(e.target.value)}
             />
@@ -208,7 +208,7 @@ function SearchContent() {
 
                       {/* Score Bar */}
                       <div className="pt-4 flex items-center gap-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Relevance</span>
+                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Score</span>
                         <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden flex">
                           <div 
                             className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"
