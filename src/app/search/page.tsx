@@ -87,7 +87,7 @@ function SearchContent() {
     <div className="flex-1 w-full flex flex-col bg-slate-950 text-slate-100">
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 p-4 shadow-sm">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-6">
           {/* Small Logo */}
           <div 
             className="cursor-pointer shrink-0" 
@@ -139,7 +139,7 @@ function SearchContent() {
                 const scorePercentage = (result.score * 100).toFixed(2);
                 
                 return (
-                  <div key={globalIndex} className="group p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 hover:bg-slate-800/80 transition-all duration-300 shadow-sm hover:shadow-lg relative overflow-hidden">
+                  <div key={globalIndex} className="group p-4 sm:p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 hover:bg-slate-800/80 transition-all duration-300 shadow-sm hover:shadow-lg relative overflow-hidden">
                     {/* Rank Badge */}
                     <div className="absolute top-5 left-5 w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-cyan-400 border border-slate-700">
                       #{globalIndex}
@@ -167,13 +167,13 @@ function SearchContent() {
                                 href={author.link} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan-950/40 text-cyan-300 border border-cyan-800/60 hover:bg-cyan-900/60 hover:border-cyan-600/60 hover:text-cyan-200 transition-all shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] md:min-h-0 md:px-2.5 md:py-1 rounded-md bg-cyan-950/40 text-cyan-300 border border-cyan-800/60 hover:bg-cyan-900/60 hover:border-cyan-600/60 hover:text-cyan-200 transition-all shadow-sm"
                               >
                                 <User className="w-3.5 h-3.5 text-cyan-500" />
                                 {author.name}
                               </a>
                             ) : (
-                              <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
+                              <span key={i} className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] md:min-h-0 md:px-2.5 md:py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50">
                                 <User className="w-3.5 h-3.5 text-slate-400" />
                                 <span>{author.name}</span>
                               </span>
@@ -183,7 +183,7 @@ function SearchContent() {
                       )}
 
                       {/* Metadata Row */}
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-400">
+                      <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 text-xs text-slate-400">
                         {result.publish_date && (
                           <span className="flex items-center gap-1">
                             <span className="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
@@ -207,9 +207,9 @@ function SearchContent() {
                       </div>
 
                       {/* Score Bar */}
-                      <div className="pt-4 flex items-center gap-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Score</span>
-                        <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden flex">
+                      <div className="pt-4 flex flex-wrap sm:flex-nowrap items-center gap-3 w-full">
+                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider shrink-0">Score</span>
+                        <div className="flex-1 min-w-[100px] h-1.5 bg-slate-800 rounded-full overflow-hidden flex">
                           <div 
                             className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"
                             style={{ width: `${Math.max(1, result.score * 100)}%` }}
@@ -234,12 +234,12 @@ function SearchContent() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   disabled={currentPage === 1}
-                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 
-                <div className="flex gap-1">
+                <div className="hidden md:flex gap-1">
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     // Logic to show a window of pages around currentPage
                     let pageNum = currentPage;
@@ -272,13 +272,17 @@ function SearchContent() {
                   })}
                 </div>
 
+                <div className="md:hidden flex items-center px-4 text-sm font-medium text-slate-300">
+                  Page {currentPage} of {totalPages}
+                </div>
+
                 <button
                   onClick={() => {
                     setCurrentPage(p => Math.min(totalPages, p + 1));
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -291,15 +295,15 @@ function SearchContent() {
             <div className="relative mb-8">
               <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-2xl animate-pulse"></div>
               <div className="relative p-6 bg-slate-900/80 rounded-full border border-slate-800 shadow-xl">
-                <Telescope className="w-16 h-16 text-cyan-400" />
+                <Telescope className="w-48 h-48 md:w-64 md:h-64 text-cyan-400" />
               </div>
             </div>
             
             <h2 className="text-2xl font-bold text-slate-200 mb-2">
               No results found
             </h2>
-            <p className="text-slate-400 mb-8 max-w-md">
-              Your search - <span className="text-white font-semibold">{currentQuery}</span> - did not match any documents.
+            <p className="text-slate-400 mb-8 max-w-md break-words text-center px-4 sm:px-0">
+              Your search - <span className="text-white font-semibold break-all">{currentQuery}</span> - did not match any documents.
             </p>
             
             <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 max-w-md w-full text-left shadow-lg">
