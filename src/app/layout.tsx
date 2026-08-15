@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} dark antialiased h-full`}>
-      <body className="min-h-full flex flex-col bg-slate-900 text-slate-50">
+      <body className="min-h-full flex flex-col bg-slate-900 text-slate-50 overflow-x-hidden">
         {children}
         <footer className="w-full py-6 mt-auto border-t border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
           <div className="max-w-6xl mx-auto px-4 text-center">
