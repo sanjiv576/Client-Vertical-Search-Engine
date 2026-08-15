@@ -16,18 +16,18 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-900 to-black">
+    <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-900 to-black">
       <div className="w-full max-w-4xl flex flex-col items-center space-y-12 mb-32">
         {/* Animated Glow Effect Behind Title */}
         <div className="relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-lg blur-2xl opacity-20 animate-pulse"></div>
-          <h1 className="relative text-5xl md:text-7xl font-extrabold text-center tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 drop-shadow-lg p-2 leading-tight">
+          <h1 className="relative text-4xl md:text-6xl lg:text-8xl font-extrabold text-center tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 drop-shadow-lg p-2 leading-tight">
             Coventry Publications<br />
-            <span className="text-3xl md:text-5xl">Vertical Search Engine</span>
+            <span className="text-2xl md:text-4xl lg:text-6xl">Vertical Search Engine</span>
           </h1>
         </div>
 
-        <form onSubmit={handleSearch} className="w-full max-w-2xl relative group">
+        <form onSubmit={handleSearch} className="w-full px-4 md:px-0 md:w-3/4 lg:w-full lg:max-w-2xl relative group">
           {/* Subtle glow behind search bar */}
           <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/30 to-purple-500/30 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
 
@@ -69,7 +69,7 @@ export default function Home() {
                 router.push(`/search?q=${encodeURIComponent(suggestion)}`);
               }}
               title={suggestion}
-              className="px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all text-left max-w-full md:max-w-xl truncate shadow-sm hover:shadow-md"
+              className="px-4 py-3 rounded-full bg-slate-800/50 border border-slate-700/50 hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all text-left max-w-full md:max-w-xl truncate shadow-sm hover:shadow-md min-h-[44px]"
             >
               {suggestion}
             </button>
