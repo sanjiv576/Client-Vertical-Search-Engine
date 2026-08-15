@@ -38,7 +38,7 @@ export default function Home() {
             <input
               type="text"
               autoFocus
-              className="w-full pl-16 pr-8 py-5 rounded-full bg-slate-900/90 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-900 focus:ring-4 focus:ring-cyan-500/20 text-md text-slate-100 placeholder-slate-500 outline-none transition-all duration-300 shadow-xl backdrop-blur-md"
+              className="w-full pl-16 pr-32 py-5 rounded-full bg-slate-900/90 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-900 focus:ring-4 focus:ring-cyan-500/20 text-md text-slate-100 placeholder-slate-500 outline-none transition-all duration-300 shadow-xl backdrop-blur-md"
               placeholder="Search academic papers, authors, journals..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
