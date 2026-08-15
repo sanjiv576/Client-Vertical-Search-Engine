@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         </form>
 
-        <div className="flex flex-wrap justify-center gap-3 text-sm text-slate-400 mt-8 max-w-4xl">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-sm text-slate-400 mt-8 w-full max-w-4xl px-4 sm:px-0">
           {[
             "Published by author Whelan, M.",
             "Research paper published in 2026",
