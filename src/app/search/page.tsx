@@ -20,7 +20,7 @@ function SearchContent() {
   const RESULTS_PER_PAGE = 10;
 
   const BASE_URL = "https://assignment-cu-publications-vse-api.onrender.com";
-  const LOCALBASE_URL = "http://localhost:8000";
+  const LOCAL_BASE_URL = "http://localhost:8000";
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -36,8 +36,8 @@ function SearchContent() {
       const startTime = performance.now();
 
       try {
-        // const response = await fetch("https://assignment-cu-publications-vse-api.onrender.com/search/", {
-        const response = await fetch("http://localhost:8000/search/", {
+        const response = await fetch("https://assignment-cu-publications-vse-api.onrender.com/search/", {
+        // const response = await fetch("http://localhost:8000/search/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: currentQuery.trim() }),

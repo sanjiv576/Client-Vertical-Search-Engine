@@ -12,9 +12,9 @@ interface ClassifyTabProps {
 
 const CLASSIFY_OPTIONS = [
   "Spain won FIFA World Cup 2026",
-  "The U.S. administration expanded global import duties by 10% to 12.5 percent across roughly 60 countries",
-  "The White House renewed efforts seeking to remove Federal Reserve Governor Lisa Cook.",
-  "Cristiano Ronaldo and Georgina Rodriguez officially tied the knot after being together for 10 years."
+  "The animated musical became a cultural phenomenon, dominating music charts and merchandise sales.",
+  "Social media platforms updated policies regarding political advertisement verification.",
+  "The new tax reform package aims to boost domestic manufacturing and exports.",
 ];
 
 export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
@@ -24,7 +24,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
-    
+
     const res = await onClassify(text);
     setResult(res);
   };
@@ -42,7 +42,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 p-6 md:p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 bg-purple-500/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-        
+
         <div className="flex items-center gap-3 mb-2">
           <SearchCode className="w-6 h-6 text-purple-400" />
           <h2 className="text-xl md:text-2xl font-bold text-slate-100">Classify a Document</h2>
@@ -62,7 +62,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
               required
             />
           </div>
-          
+
           <div className="flex flex-col gap-2 mt-4">
             <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Try an example:</span>
             <div className="flex flex-col gap-2">
@@ -108,12 +108,12 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
               {(() => {
                 const config = getCategoryConfig(result.data.predicted_category);
                 const Icon = config.icon;
-                
+
                 return (
                   <div className={`p-6 rounded-2xl border ${config.bg} ${config.border} backdrop-blur-md shadow-lg relative overflow-hidden group`}>
                     {/* Subtle glow effect behind the result card based on category */}
                     <div className={`absolute top-1/2 right-0 p-24 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2 opacity-20 ${config.bg}`}></div>
-                    
+
                     <div className="flex items-center gap-4 mb-4">
                       <div className={`p-3 rounded-xl bg-slate-900 shadow-inner border border-slate-800 ${config.color}`}>
                         <Icon className="w-8 h-8" />
@@ -129,14 +129,14 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="mt-4 pt-4 border-t border-slate-800/50">
                       <div className="flex justify-between text-xs text-slate-500 mb-2 font-medium">
                         <span>Confidence</span>
                         <span>~99.9%</span>
                       </div>
                       <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                        <motion.div 
+                        <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: "99.9%" }}
                           transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
