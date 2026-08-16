@@ -3,6 +3,7 @@ import {
   ClusterResponse,
   ResetClusterResponse,
   GetDocsResponse,
+  AccuracyResponse,
 } from "../../types/clustering";
 
 const BASE_URL = "https://assignment-cu-publications-vse-api.onrender.com";
@@ -41,6 +42,21 @@ export async function resetCluster(): Promise<ResetClusterResponse> {
 
 export async function getDocs(): Promise<GetDocsResponse> {
   const response = await fetch(`${BASE_URL}/clustering/get_docs`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function getClusteringAccuracy(): Promise<AccuracyResponse> {
+  const response = await fetch(`${BASE_URL}/clustering/clustering_accuracy`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
