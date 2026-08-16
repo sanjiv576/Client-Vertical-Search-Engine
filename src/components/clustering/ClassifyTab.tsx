@@ -38,6 +38,14 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
     }
   };
 
+  const getConfidenceProgressColor = (confidence: number) => {
+    if (confidence >= 0.8) return "bg-emerald-500";
+    if (confidence >= 0.6) return "bg-green-500";
+    if (confidence >= 0.4) return "bg-yellow-500";
+    if (confidence >= 0.2) return "bg-orange-500";
+    return "bg-rose-500";
+  };
+
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 p-6 md:p-8 relative overflow-hidden">
@@ -108,6 +116,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
               {(() => {
                 const config = getCategoryConfig(result.data.predicted_category);
                 const Icon = config.icon;
+                const confidence = result.data.confidence || 0;
 
                 return (
                   <div className={`p-6 rounded-2xl border ${config.bg} ${config.border} backdrop-blur-md shadow-lg relative overflow-hidden group`}>
@@ -119,10 +128,11 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
                         <Icon className="w-8 h-8" />
                       </div>
                       <div>
-                        <h3 className={`text-2xl font-extrabold tracking-tight ${config.color}`}>
-                          {result.data.predicted_category}
+                        <h3 className={`text-xl font-extrabold tracking-tight ${config.color}`}>
+                          {/* Classified as {result.data.predicted_category} ({Math.round(confidence * 100)}%) */}
+                          Classified as "{result.data.predicted_category}"
                         </h3>
-                        <p className="text-slate-400 text-sm font-medium flex items-center gap-2">
+                        <p className="text-slate-400 text-sm font-medium flex items-center gap-2 mt-1">
                           <span>Cluster: {result.data.cluster}</span>
                           <span className="w-1 h-1 rounded-full bg-slate-600"></span>
                           <span>Method: k-means</span>
@@ -130,20 +140,25 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-4 border-t border-slate-800/50">
+                    {/* <div className="mt-4 pt-4 border-t border-slate-800/50">
                       <div className="flex justify-between text-xs text-slate-500 mb-2 font-medium">
                         <span>Confidence</span>
-                        <span>~99.9%</span>
+                        <span>{Math.round(confidence * 100)}%</span>
                       </div>
                       <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
-                          animate={{ width: "99.9%" }}
+                          animate={{ width: `${Math.round(confidence * 100)}%` }}
                           transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                          className={`h-full rounded-full ${config.color.replace('text-', 'bg-')}`}
+                          className={`h-full rounded-full ${getConfidenceProgressColor(confidence)} shadow-[0_0_10px_rgba(255,255,255,0.1)]`}
                         ></motion.div>
                       </div>
-                    </div>
+                      {confidence < 0.3 && (
+                        <p className="mt-3 text-xs text-orange-400/90 font-medium flex items-center gap-1.5">
+                          ⚠️ Low confidence prediction. Manual review suggested.
+                        </p>
+                      )}
+                    </div> */}
                   </div>
                 );
               })()}
