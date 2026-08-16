@@ -6,8 +6,8 @@ The search engine allows users to rapidly search through academic papers, journa
 
 ## 🚀 Live Demo & API
 - **Live Frontend**: `https://assignment-cu-vse-client.vercel.app/`
-- **Backend API**: `https://assignment-cu-publications-vse-api.onrender.com/search/`
-- **Local API Environment**: `http://localhost:8000/search/`
+- **Backend API**: `https://assignment-cu-publications-vse-api.onrender.com/`
+- **Local API Environment**: `http://localhost:8000/`
 
 ---
 
@@ -58,6 +58,13 @@ The application is structured using the **Next.js App Router** architecture, ens
 ### 5. Graceful Empty States
 - If the search engine finds zero matches, the UI transitions to a beautifully illustrated empty state (featuring a glowing telescope).
 - Provides actionable search suggestions and spelling checks for the user.
+
+### 6. Automated Document Clustering (K-Means)
+- Features a robust **Task 2: Document Clustering** module seamlessly integrated into the frontend.
+- **System Metrics Dashboard**: Displays real-time model accuracy, system assessments, and overall category distributions (Economics, Entertainment, Politics) using interactive charts.
+- **Interactive Document Classification**: Allows users to input custom text to receive instant category predictions driven by a K-Means model.
+- **Per-Document Confidence Scores**: Renders visually dynamic confidence progress bars and color-coded badges to indicate the mathematical prediction strength of the classification.
+- **Automated Data Retrieval & Retraining**: Built-in functionality to scrape new RSS feeds, update the database, and instantly retrain the K-Means cluster model directly from the UI.
 
 ---
 
