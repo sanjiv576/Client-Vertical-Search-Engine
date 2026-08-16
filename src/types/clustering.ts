@@ -8,6 +8,13 @@ export interface ClusteredDocument {
   true_category: string | null;
   cluster: number;
   predicted_category: string;
+  confidence: number;
+}
+
+export interface AccuracyResponse {
+  status: string;
+  accuracy: number;
+  assessment: string;
 }
 
 export interface ClusterResponse {
