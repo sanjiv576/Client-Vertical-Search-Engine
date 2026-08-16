@@ -1,8 +1,10 @@
 "use client";
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
-import { RefreshCw, Database } from "lucide-react";
-import { useState } from "react";
+import { RefreshCw, Database, Activity } from "lucide-react";
+import { useState, useEffect } from "react";
+import { getClusteringAccuracy } from "../../lib/api/clustering";
+import { AccuracyResponse } from "../../types/clustering";
 
 interface OverviewTabProps {
   stats: {
@@ -18,6 +20,32 @@ interface OverviewTabProps {
 
 export function OverviewTab({ stats, isLoading, isResetting, onReset }: OverviewTabProps) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [accuracyData, setAccuracyData] = useState<AccuracyResponse | null>(null);
+  const [isFetchingAccuracy, setIsFetchingAccuracy] = useState(false);
+
+  const fetchAccuracy = async () => {
+    setIsFetchingAccuracy(true);
+    try {
+      const data = await getClusteringAccuracy();
+      setAccuracyData(data);
+    } catch (error) {
+      console.error("Failed to fetch accuracy", error);
+    } finally {
+      setIsFetchingAccuracy(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAccuracy();
+  }, []);
+
+  const getAccuracyColor = (accuracy: number) => {
+    if (accuracy >= 90) return "text-emerald-400";
+    if (accuracy >= 75) return "text-green-400";
+    if (accuracy >= 60) return "text-yellow-400";
+    if (accuracy >= 50) return "text-orange-400";
+    return "text-rose-500";
+  };
 
   const data = [
     { name: "Economics", value: stats.economicsCount, color: "#10b981" },
@@ -56,7 +84,7 @@ export function OverviewTab({ stats, isLoading, isResetting, onReset }: Overview
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Cluster Distribution */}
         <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 p-6 flex flex-col relative overflow-hidden">
           <div className="absolute top-0 right-0 p-32 bg-blue-500/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
@@ -115,10 +143,6 @@ export function OverviewTab({ stats, isLoading, isResetting, onReset }: Overview
                 <span className="text-slate-100 font-medium text-sm">{stats.totalDocuments}</span>
               </div>
               <div className="flex justify-between items-center pb-3 border-b border-slate-800/50">
-                <span className="text-slate-400 text-sm">Silhouette Score</span>
-                <span className="text-slate-100 font-medium text-sm">0.0193</span>
-              </div>
-              <div className="flex justify-between items-center pb-3 border-b border-slate-800/50">
                 <span className="text-slate-400 text-sm">Trained At</span>
                 <span className="text-slate-100 font-medium text-sm">
                   {new Date().toISOString().replace('T', ' ').substring(0, 19)}
@@ -139,6 +163,41 @@ export function OverviewTab({ stats, isLoading, isResetting, onReset }: Overview
             <p className="text-xs text-slate-500 mt-3 flex items-center gap-1.5">
               Fetches RSS feeds, stores articles per category, re-trains K-Means.
             </p>
+          </div>
+        </div>
+
+        {/* System Metrics */}
+        <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 p-6 flex flex-col justify-between">
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-purple-400" />
+                {/* System Metrics */}
+                Accuracy Rate
+              </h3>
+              <button
+                onClick={fetchAccuracy}
+                disabled={isFetchingAccuracy}
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                <RefreshCw className={`w-4 h-4 ${isFetchingAccuracy ? "animate-spin" : ""}`} />
+              </button>
+            </div>
+            
+            {accuracyData ? (
+              <div className="flex flex-col items-center justify-center py-6">
+                <div className={`text-6xl font-extrabold ${getAccuracyColor(accuracyData.accuracy)} mb-2`}>
+                  {accuracyData.accuracy.toFixed(1)}%
+                </div>
+                <div className="text-sm font-medium text-slate-300 text-center px-4">
+                  {accuracyData.assessment}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-40">
+                <div className="text-sm text-slate-500">No accuracy data available.</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
