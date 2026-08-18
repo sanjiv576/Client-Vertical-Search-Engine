@@ -11,10 +11,10 @@ interface ClassifyTabProps {
 }
 
 const CLASSIFY_OPTIONS = [
-  "Spain won FIFA World Cup 2026",
-  "The animated musical became a cultural phenomenon, dominating music charts and merchandise sales.",
-  "Social media platforms updated policies regarding political advertisement verification.",
-  "The new tax reform package aims to boost domestic manufacturing and exports.",
+  "International diplomatic updates highlight ongoing discussions regarding trade, regional policies, and security.",
+  "Taylor Swift and Madonna lead the nominations list for the upcoming MTV Video Music Awards.",
+  "Global government debt yields hit multi-decade highs as geopolitical conflicts disrupt energy markets and fuel inflation concerns",
+  "Trump says US to reduce military drills with South Korea after it stayed out of Iran war",
 ];
 
 export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
@@ -140,7 +140,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
                       </div>
                     </div>
 
-                    {/* <div className="mt-4 pt-4 border-t border-slate-800/50">
+                    <div className="mt-4 pt-4 border-t border-slate-800/50">
                       <div className="flex justify-between text-xs text-slate-500 mb-2 font-medium">
                         <span>Confidence</span>
                         <span>{Math.round(confidence * 100)}%</span>
@@ -158,7 +158,7 @@ export function ClassifyTab({ isClassifying, onClassify }: ClassifyTabProps) {
                           ⚠️ Low confidence prediction. Manual review suggested.
                         </p>
                       )}
-                    </div> */}
+                    </div>
                   </div>
                 );
               })()}
