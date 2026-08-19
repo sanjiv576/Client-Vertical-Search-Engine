@@ -10,16 +10,16 @@ export function Navigation() {
   return (
     <nav className="w-full border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-center h-16">
           <div className="flex items-center gap-8">
-            <div className="flex-shrink-0 flex items-center gap-2">
+            {/* <div className="flex-shrink-0 flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
                 <span className="text-white font-bold text-lg">IR</span>
               </div>
               <span className="font-bold text-lg text-slate-100 hidden sm:block tracking-tight">
                 IR Research - <span className="text-slate-400">ST7071CEM</span>
               </span>
-            </div>
+            </div> */}
             
             <div className="flex items-center gap-2">
               <Link
@@ -31,7 +31,7 @@ export function Navigation() {
                 }`}
               >
                 <Search className="w-4 h-4" />
-                <span className="hidden sm:inline">Vertical Search</span>
+                <span className="hidden sm:inline">Task 1: Vertical Search</span>
               </Link>
               
               <Link
@@ -43,17 +43,17 @@ export function Navigation() {
                 }`}
               >
                 <Layout className="w-4 h-4" />
-                <span className="hidden sm:inline">News Clustering</span>
+                <span className="hidden sm:inline">Task 2: News Clustering</span>
               </Link>
             </div>
           </div>
 
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 shadow-inner">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
               <span className="text-xs font-medium text-slate-300">Coventry University</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
