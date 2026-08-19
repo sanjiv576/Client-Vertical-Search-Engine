@@ -30,6 +30,7 @@ function SearchContent() {
       }
 
       setLoading(true);
+      setResults([]);
       setError(null);
       setCurrentPage(1); // Reset page on new search
 
@@ -74,6 +75,7 @@ function SearchContent() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (queryInput.trim() && queryInput.trim() !== currentQuery) {
+      setResults([]); // Clear results immediately on new search
       router.push(`/search?q=${encodeURIComponent(queryInput.trim())}`);
       setCurrentQuery(queryInput.trim());
     }
@@ -102,17 +104,22 @@ function SearchContent() {
           </div>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="flex-1 w-full max-w-2xl relative group">
+          <form onSubmit={handleSearch} className="flex-1 w-full max-w-2xl relative flex items-center group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-slate-400 group-focus-within:text-cyan-400 transition-colors" />
             </div>
             <input
               type="text"
-              className="w-full pl-12 pr-4 py-3 rounded-full text-md bg-slate-800/80 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-800 focus:ring-2 focus:ring-cyan-500/20 text-slate-100 placeholder-slate-400 outline-none transition-all shadow-inner"
+              className="w-full pl-12 pr-24 py-3 rounded-full text-md bg-slate-800/80 border border-slate-700/50 focus:border-cyan-500/50 focus:bg-slate-800 focus:ring-2 focus:ring-cyan-500/20 text-slate-100 placeholder-slate-400 outline-none transition-all shadow-inner"
               value={queryInput}
               onChange={(e) => setQueryInput(e.target.value)}
             />
-            <button type="submit" className="sr-only">Search</button>
+            <button 
+              type="submit" 
+              className="absolute right-2 px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold rounded-full shadow-[0_0_10px_rgba(8,145,178,0.3)] transition-all active:scale-95"
+            >
+              Search
+            </button>
           </form>
         </div>
       </header>
