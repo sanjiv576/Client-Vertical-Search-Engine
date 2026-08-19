@@ -29,15 +29,15 @@ export function DataTableTab({ documents, isLoading }: DataTableTabProps) {
   const sortedDocs = [...documents].sort((a, b) => b._id.localeCompare(a._id));
 
   return (
-    <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm whitespace-nowrap">
+    <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-800/50 overflow-hidden w-full">
+      <div className="w-full">
+        <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
           <thead className="text-xs uppercase bg-slate-950/80 text-slate-400 sticky top-0 z-10 backdrop-blur-md shadow-sm hidden md:table-header-group">
             <tr>
               <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider">Document Snippet</th>
-              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider">Original Category</th>
-              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider">Cluster</th>
-              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider">Predicted</th>
+              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider whitespace-nowrap">Original Category</th>
+              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider whitespace-nowrap">Cluster</th>
+              <th scope="col" className="px-4 md:px-6 py-3 md:py-4 font-semibold tracking-wider whitespace-nowrap">Predicted</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800/50 block md:table-row-group">
@@ -50,9 +50,9 @@ export function DataTableTab({ documents, isLoading }: DataTableTabProps) {
             ) : (
               sortedDocs.map((doc) => (
                 <tr key={doc._id} className="hover:bg-slate-800/30 transition-colors block md:table-row p-4 md:p-0">
-                  <td className="block md:table-cell px-2 md:px-6 py-3 md:py-4">
+                  <td className="block md:table-cell px-2 md:px-6 py-3 md:py-4 w-full md:w-auto">
                     <span className="md:hidden text-[10px] font-semibold text-slate-500 uppercase block mb-1.5 tracking-wider">Document Snippet</span>
-                    <div className="w-full md:w-64 lg:w-[32rem] xl:w-[48rem] whitespace-normal md:whitespace-nowrap md:truncate text-slate-300 font-medium leading-relaxed" title={doc.document}>
+                    <div className="w-full text-slate-300 font-medium leading-relaxed whitespace-normal" title={doc.document}>
                       {doc.document}
                     </div>
                   </td>
