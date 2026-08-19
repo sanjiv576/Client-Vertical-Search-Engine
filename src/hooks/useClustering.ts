@@ -41,7 +41,9 @@ export function useClustering() {
     }
   };
 
-  const handleClassify = async (text: string): Promise<ClusterResponse | null> => {
+  const handleClassify = async (
+    text: string,
+  ): Promise<ClusterResponse | null> => {
     setIsClassifying(true);
     setError(null);
     try {
@@ -61,9 +63,14 @@ export function useClustering() {
 
   const stats = {
     totalDocuments: documents.length,
-    economicsCount: documents.filter(d => d.predicted_category === "Economics" || d.cluster === 0).length,
-    entertainmentCount: documents.filter(d => d.predicted_category === "Entertainment" || d.cluster === 1).length,
-    politicsCount: documents.filter(d => d.predicted_category === "Politics" || d.cluster === 2).length,
+    economicsCount: documents.filter(
+      (d) => d.predicted_category === "Economics",
+    ).length,
+    entertainmentCount: documents.filter(
+      (d) => d.predicted_category === "Entertainment",
+    ).length,
+    politicsCount: documents.filter((d) => d.predicted_category === "Politics")
+      .length,
   };
 
   return {
@@ -75,6 +82,6 @@ export function useClustering() {
     stats,
     handleReset,
     handleClassify,
-    fetchDocuments
+    fetchDocuments,
   };
 }
